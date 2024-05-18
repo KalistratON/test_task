@@ -1,0 +1,37 @@
+* {
+        font-family: Georgia, serif;
+}
+
+QMessageBox {
+        color : white;
+        background-color : gray
+}
+
+QPushButton {
+        color : white;
+	background-color : gray
+}
+
+QLineEdit {
+        background-color : yellow;
+        color : black;
+        padding : 2px;
+        border : 2px solid gray;
+        border-radius : 8px;
+}
+
+QLabel {
+        background-color : grey;
+        color : white;
+        padding : 2px;
+        border : 2px solid gray;
+        border-radius : 8px;
+}
+
+QMainWindow {
+        background-color : #609f60;
+}
+
+QMessageBox {
+    background-color : grey;
+}
