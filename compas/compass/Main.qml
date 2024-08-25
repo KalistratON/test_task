@@ -18,19 +18,30 @@ Window {
 
         Compass { id: myCompass }
 
-        TextField {
-            id: myInput
+        Row {
             anchors.left: parent.left
             anchors.right: parent.right
-            placeholderText: "num_1,num_2,num_3,num_4"
-            font.pixelSize: 16
+
+            TextField {
+                id: myNumbersInput
+                placeholderText: "num_1,num_2,num_3,num_4"
+                font.pixelSize: 16
+            }
+
+            TextField {
+                id: myNInput
+                placeholderText: "N"
+                font.pixelSize: 16
+            }
         }
+
         Button {
             anchors.left: parent.left
             anchors.right: parent.right
             text: "Calculate"
-            onClicked: myCompass.calculateAverageSlot (myInput.text)
+            onClicked: myCompass.calculateAverageSlot (myNumbersInput.text, myNInput.text)
         }
+
         Text {
             id: myOutput
             anchors.left: parent.left

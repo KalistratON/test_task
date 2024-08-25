@@ -12,7 +12,7 @@ class Compass : public QObject
 public:
     explicit Compass (QObject *parent = nullptr);
 
-    Q_INVOKABLE void calculateAverageSlot (const QString& theNumberLine);
+    Q_INVOKABLE void calculateAverageSlot (const QString& theNumberLine, const QString& theN);
 
 signals:
     void lineSumberReadySignal (double theAvarage);

@@ -4,27 +4,30 @@
 
 #include <algorithm>
 #include <string>
+#include <deque>
 
 
 namespace {
 
-double GetNumbers (std::string theNumberLine)
+double GetNumbers (std::string theNumberLine, int theCountNumber)
 {
-    int aSumNumber = 0;
-    int aCountNumber = 1;
+    if (theCountNumber < 1) {
+        return 0.;
+    }
 
+    std::deque<int> aNumbers;
     auto anIt = std::find (theNumberLine.begin(), theNumberLine.end(), ',');
     while (anIt != theNumberLine.end()) {
-        ++aCountNumber;
-
-        aSumNumber +=  stoi (std::string (theNumberLine.begin(), anIt));
+        aNumbers.push_front (stoi (std::string (theNumberLine.begin(), anIt)));
         theNumberLine.erase (theNumberLine.begin(), std::next (anIt));
 
         anIt = std::find (theNumberLine.begin(), theNumberLine.end(), ',');
     }
 
-    aSumNumber +=  stoi (std::string (theNumberLine.begin(), anIt));
-    return static_cast<double> (aSumNumber) / aCountNumber;
+    aNumbers.push_front (stoi (std::string (theNumberLine.begin(), anIt)));
+
+    int aTargetCount = std::min (theCountNumber, static_cast <int> (aNumbers.size()));
+    return std::accumulate (aNumbers.begin(), aNumbers.begin() + aTargetCount, 0) / aTargetCount;
 }
 
 }
@@ -33,7 +36,13 @@ Compass::Compass(QObject *parent)
     : QObject{parent}
 {}
 
-void Compass::calculateAverageSlot (const QString& theNumberLine)
+void Compass::calculateAverageSlot (const QString& theNumberLine, const QString& theN)
 {
-    emit lineSumberReadySignal (theNumberLine.isEmpty() ? 0. : GetNumbers (theNumberLine.toStdString()));
+    double anAvarage;
+    try {
+        anAvarage = theNumberLine.isEmpty() || theN.isEmpty() ? 0. : GetNumbers (theNumberLine.toStdString(), theN.toInt());
+    } catch (...) {
+        anAvarage = 0.;
+    }
+    emit lineSumberReadySignal (anAvarage);
 }
