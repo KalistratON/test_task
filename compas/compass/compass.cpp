@@ -27,7 +27,7 @@ double GetNumbers (std::string theNumberLine, int theCountNumber)
     aNumbers.push_front (stoi (std::string (theNumberLine.begin(), anIt)));
 
     int aTargetCount = std::min (theCountNumber, static_cast <int> (aNumbers.size()));
-    return std::accumulate (aNumbers.begin(), aNumbers.begin() + aTargetCount, 0) / aTargetCount;
+    return std::accumulate (aNumbers.begin(), aNumbers.begin() + aTargetCount, 0) / static_cast<double> (aTargetCount);
 }
 
 }
